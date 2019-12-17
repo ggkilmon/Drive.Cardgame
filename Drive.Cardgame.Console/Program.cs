@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Drive.Cardgame.Core;
+using System;
 
-namespace Drive.Cardgame.Console
+namespace Drive.Cardgame.ConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Game g = new Game();
+            g.StartGame();
         }
     }
 }
