@@ -8,4 +8,8 @@
     <PackageReference Include="NRules" Version="0.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Game\Rules\" />
+  </ItemGroup>
+
 </Project>

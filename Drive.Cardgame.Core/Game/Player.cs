@@ -9,6 +9,7 @@ namespace Drive.Cardgame.Core.Game
     {
         public string Name { get; set; }
         public List<ICard> CardsInHand { get; set; }
+        public int TotalDistance { get; set; }
 
         public Player(string name)
         {

@@ -8,5 +8,15 @@ namespace Drive.Cardgame.Core.Cards
     {
         public int Score { get; set; }
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public string GetName()
+        {
+            return this.ToString();
+        }
     }
 }

@@ -41,6 +41,11 @@ namespace Drive.Cardgame.Core.Cards
             return deck;
         }
 
+        public ICard DrawCard(Stack<ICard> deck)
+        {
+            return deck.Pop();
+        }
+
         private ICard[] InitDistanceCards()
         {
             List<ICard> cards = new List<ICard>();
