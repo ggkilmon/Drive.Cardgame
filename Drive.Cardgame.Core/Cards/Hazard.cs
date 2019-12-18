@@ -1,7 +1,7 @@
-﻿using Drive.Cardgame.Core.Interfaces;
+﻿using Drive.Cardgame.Core.Cards.Interfaces;
 using System;
 
-namespace Drive.Cardgame.Core
+namespace Drive.Cardgame.Core.Cards
 {
     public class Hazard : BaseCard, ICard
     {

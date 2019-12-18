@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Drive.Cardgame.Core
+namespace Drive.Cardgame.Core.Cards
 {
     public abstract class BaseCard
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Drive.Cardgame.Core.Interfaces
+namespace Drive.Cardgame.Core.Cards.Interfaces
 {
     public interface ICard
     {

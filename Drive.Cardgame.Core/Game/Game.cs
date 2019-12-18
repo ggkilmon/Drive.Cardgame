@@ -1,24 +1,23 @@
-﻿using Drive.Cardgame.Core.Interfaces;
+﻿using Drive.Cardgame.Core.Cards;
+using Drive.Cardgame.Core.Cards.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Drive.Cardgame.Core
+namespace Drive.Cardgame.Core.Game
 {
     public class Game
     {
-        public object[] Players { get; set; }
-        public ICard[] DrawPile { get; set; }
-        public ICard[] DiscardPile { get; set; }
+        public Player[] Players { get; set; }
+        public Stack<ICard> DrawPile { get; set; }
+        public Stack<ICard> DiscardPile { get; set; }
+        public const int NUMBER_OF_CARDS_PER_HAND = 6;
 
         public void StartGame()
         {
             DrawPile = InitDeck();
-            DrawPile = InitDeck();
-            DrawPile = InitDeck();
-            DrawPile = InitDeck();
-            //shuffle deck and populate drawpile
-            //make sure enough players are created
+            Players = InitPlayers();
+            DealToPlayers(Players, DrawPile, NUMBER_OF_CARDS_PER_HAND);
         }
 
         public void Turn()
@@ -31,7 +30,7 @@ namespace Drive.Cardgame.Core
                 //its ok if player has less cards, as long as draw pile is empty
         }
 
-        public ICard[] InitDeck()
+        public Stack<ICard> InitDeck()
         {
             List<ICard> cards = new List<ICard>();
             cards.AddRange(InitDistanceCards());
@@ -39,7 +38,35 @@ namespace Drive.Cardgame.Core
             cards.AddRange(InitRemedyCards());
             cards.AddRange(InitHazardCards());
 
-            return Shuffle(cards.ToArray());
+            ICard[] shuffledDeck = Shuffle(cards.ToArray());
+
+            Stack<ICard> convertedDeck = new Stack<ICard>();
+            for(var i = shuffledDeck.Length - 1; i >= 0; i--)
+            {
+                convertedDeck.Push(shuffledDeck[i]);
+            }
+
+            return convertedDeck;
+        }
+
+        public Player[] InitPlayers()
+        {
+            List<Player> players = new List<Player>();
+            players.Add(new Player("Player 1"));
+            players.Add(new Player("Player 2"));
+
+            return players.ToArray();
+        }
+
+        public void DealToPlayers(Player[] players, Stack<ICard> deck, int numberOfCardsToDeal)
+        {
+            for (var i = 0; i < numberOfCardsToDeal; i++)
+            {
+                foreach (var player in players)
+                {
+                    player.CardsInHand.Add(deck.Pop());
+                }
+            }
         }
 
         private ICard[] InitDistanceCards()
