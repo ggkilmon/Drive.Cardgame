@@ -17,18 +17,20 @@ namespace Drive.Cardgame.Core.Game
         public const int NUMBER_OF_CARDS_PER_HAND = 6;
         private int _endGameDistance;
         private int _currentPlayerIndex;
+        private int _numberOfPlayers;
 
-        public void StartGame()
+        public void StartGame(int numberOfPlayers = 2)
         {
             _currentPlayerIndex = 0;
+            _numberOfPlayers = numberOfPlayers;
             Deck = new Deck();
 
             DrawPile = Deck.BuildShuffledDeck();
-            Players = InitPlayers();
+            Players = InitPlayers(_numberOfPlayers);
             InitGame();
             DealToPlayers(Players, DrawPile, NUMBER_OF_CARDS_PER_HAND);
 
-            CurrentPlayer = Players[_currentPlayerIndex % 2];
+            CurrentPlayer = Players[_currentPlayerIndex % _numberOfPlayers];
         }
 
         public void PlayGame()
@@ -51,14 +53,28 @@ namespace Drive.Cardgame.Core.Game
                 //its ok if player has less cards, as long as draw pile is empty
         }
 
-        public void PlayCard(ICard cardPlayed)
+        public bool PlayCard(Player player, ICard cardPlayed)
         {
-            //can the card be played?
+            var cardsInPlay = player.Board.CardsInPlay;
+            bool canPlayDistance = CanPlayDistanceCard(cardsInPlay, cardPlayed);
+            bool canPlaySafety = false;
+            bool canPlayRemedy = false;
+            bool canPlayHazard = false;
+
+            if (canPlayDistance 
+                || canPlaySafety
+                || canPlayRemedy
+                || canPlayHazard) {
+                cardsInPlay.Add(cardPlayed);
+                return true;
+            }
+
+            return false;
         }
 
         public void EndTurn()
         {
-            CurrentPlayer = Players[_currentPlayerIndex++ % 2];
+            CurrentPlayer = Players[_currentPlayerIndex++ % _numberOfPlayers];
         }
 
         public bool IsEndOfGame()
@@ -73,11 +89,13 @@ namespace Drive.Cardgame.Core.Game
             _endGameDistance = Players.Length < 4 ? 700 : 1000;
         }
 
-        public Player[] InitPlayers()
+        public Player[] InitPlayers(int count = 2)
         {
             List<Player> players = new List<Player>();
-            players.Add(new Player("Player 1"));
-            players.Add(new Player("Player 2"));
+            for (var i = 0; i < count; i++)
+            {
+                players.Add(new Player($"Player {i + 1}"));
+            }
 
             return players.ToArray();
         }
@@ -93,6 +111,27 @@ namespace Drive.Cardgame.Core.Game
             }
         }
 
-        
+        public bool CanPlayDistanceCard(List<ICard> cardsInPlay, ICard cardPlayed)
+        {
+            if (cardPlayed is Distance)
+            {
+                //cannot play a distance card without first playing roll
+                if (!cardsInPlay.Any(c => c.GetName() == "Roll"))
+                {
+                    return false;
+                }
+
+                //cannot play cards more than 50 when speed limit is present
+                if (cardsInPlay.Any(c => c.GetName() == "Speed Limit"))
+                {
+                    if ((cardPlayed as Distance).Value > 50)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }
