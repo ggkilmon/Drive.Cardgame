@@ -28,17 +28,19 @@ namespace Drive.Cardgame.Core.Cards
 
         public ICard[] Shuffle(ICard[] deck)
         {
+            ICard[] shuffledDeck = new ICard[deck.Length];
+            deck.CopyTo(shuffledDeck, 0);
             var rng = new Random();
-            int n = deck.Length;
+            int n = shuffledDeck.Length;
             while (n > 1)
             {
                 int k = rng.Next(n--);
-                ICard temp = deck[n];
-                deck[n] = deck[k];
-                deck[k] = temp;
+                ICard temp = shuffledDeck[n];
+                shuffledDeck[n] = shuffledDeck[k];
+                shuffledDeck[k] = temp;
             }
 
-            return deck;
+            return shuffledDeck;
         }
 
         public ICard DrawCard(Stack<ICard> deck)
