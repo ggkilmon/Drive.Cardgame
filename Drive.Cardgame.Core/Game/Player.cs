@@ -22,7 +22,7 @@ namespace Drive.Cardgame.Core.Game
 
         public ICard RemoveCardFromHand(ICard cardToPlay)
         {
-            var card = CardsInHand.FirstOrDefault(c => c.GetName() == cardToPlay.GetName());
+            var card = CardsInHand.FirstOrDefault(c => c.GetType() == cardToPlay.GetType());
             if (card != null)
             {
                 CardsInHand.Remove(card);

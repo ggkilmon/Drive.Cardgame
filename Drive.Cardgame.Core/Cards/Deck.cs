@@ -52,11 +52,11 @@ namespace Drive.Cardgame.Core.Cards
         {
             List<ICard> cards = new List<ICard>();
 
-            cards.AddRange(InitCardInstances<Distance>(10, "25 km", 25));
-            cards.AddRange(InitCardInstances<Distance>(10, "50 km", 50));
-            cards.AddRange(InitCardInstances<Distance>(10, "75 km", 75));
-            cards.AddRange(InitCardInstances<Distance>(12, "100 km", 100));
-            cards.AddRange(InitCardInstances<Distance>(4, "200 km", 200));
+            cards.AddRange(InitCardInstances<Distance>(10, "25 km", 25, CardType.Distance.TwentyFiveKilometers));
+            cards.AddRange(InitCardInstances<Distance>(10, "50 km", 50, CardType.Distance.FiftyKilometers));
+            cards.AddRange(InitCardInstances<Distance>(10, "75 km", 75, CardType.Distance.SeventyFiveKilometers));
+            cards.AddRange(InitCardInstances<Distance>(12, "100 km", 100, CardType.Distance.OneHundredKilometers));
+            cards.AddRange(InitCardInstances<Distance>(4, "200 km", 200, CardType.Distance.TwoHundredKilometers));
 
             return cards.ToArray();
         }
@@ -65,10 +65,10 @@ namespace Drive.Cardgame.Core.Cards
         {
             List<ICard> cards = new List<ICard>();
 
-            cards.AddRange(InitCardInstances<Safety>(1, "Driving Ace", 0));
-            cards.AddRange(InitCardInstances<Safety>(1, "Extra Tank", 0));
-            cards.AddRange(InitCardInstances<Safety>(1, "Puncture-proof", 0));
-            cards.AddRange(InitCardInstances<Safety>(1, "Right of Way", 0));
+            cards.AddRange(InitCardInstances<Safety>(1, "Driving Ace", 0, CardType.Safety.DrivingAce));
+            cards.AddRange(InitCardInstances<Safety>(1, "Extra Tank", 0, CardType.Safety.ExtraTank));
+            cards.AddRange(InitCardInstances<Safety>(1, "Puncture-proof", 0, CardType.Safety.PunctureProof));
+            cards.AddRange(InitCardInstances<Safety>(1, "Right of Way", 0, CardType.Safety.RightOfWay));
 
             return cards.ToArray();
         }
@@ -77,11 +77,11 @@ namespace Drive.Cardgame.Core.Cards
         {
             List<ICard> cards = new List<ICard>();
 
-            cards.AddRange(InitCardInstances<Remedy>(6, "Repairs", 0));
-            cards.AddRange(InitCardInstances<Remedy>(6, "Gasoline", 0));
-            cards.AddRange(InitCardInstances<Remedy>(6, "Spare", 0));
-            cards.AddRange(InitCardInstances<Remedy>(6, "End of Limit", 0));
-            cards.AddRange(InitCardInstances<Remedy>(14, "Roll", 0));
+            cards.AddRange(InitCardInstances<Remedy>(6, "Repairs", 0, CardType.Remedy.Repairs));
+            cards.AddRange(InitCardInstances<Remedy>(6, "Gasoline", 0, CardType.Remedy.Gasoline));
+            cards.AddRange(InitCardInstances<Remedy>(6, "Spare", 0, CardType.Remedy.Spare));
+            cards.AddRange(InitCardInstances<Remedy>(6, "End of Limit", 0, CardType.Remedy.EndOfLimit));
+            cards.AddRange(InitCardInstances<Remedy>(14, "Roll", 0, CardType.Remedy.Roll));
 
             return cards.ToArray();
         }
@@ -90,23 +90,23 @@ namespace Drive.Cardgame.Core.Cards
         {
             List<ICard> cards = new List<ICard>();
 
-            cards.AddRange(InitCardInstances<Remedy>(3, "Accident", 0));
-            cards.AddRange(InitCardInstances<Remedy>(3, "Out of Gas", 0));
-            cards.AddRange(InitCardInstances<Remedy>(3, "Flat Tire", 0));
-            cards.AddRange(InitCardInstances<Remedy>(4, "Speed Limit", 0));
-            cards.AddRange(InitCardInstances<Remedy>(5, "Stop", 0));
+            cards.AddRange(InitCardInstances<Hazard>(3, "Accident", 0, CardType.Hazard.Accident));
+            cards.AddRange(InitCardInstances<Hazard>(3, "Out of Gas", 0, CardType.Hazard.OutOfGas));
+            cards.AddRange(InitCardInstances<Hazard>(3, "Flat Tire", 0, CardType.Hazard.FlatTire));
+            cards.AddRange(InitCardInstances<Hazard>(4, "Speed Limit", 0, CardType.Hazard.SpeedLimit));
+            cards.AddRange(InitCardInstances<Hazard>(5, "Stop", 0, CardType.Hazard.Stop));
 
             return cards.ToArray();
         }
 
-        private ICard[] InitCardInstances<T>(int numberOfCards, string name, int value) where T : ICard, new()
+        private ICard[] InitCardInstances<T>(int numberOfCards, string name, int value, Enum type) where T : ICard, new()
         {
             List<ICard> cards = new List<ICard>();
 
             for (var i = 0; i < numberOfCards; i++)
             {
                 T card = new T();
-                card.Init(name, value);
+                card.Init(name, value, type);
                 cards.Add(card);
             }
 

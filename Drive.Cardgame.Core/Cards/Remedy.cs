@@ -7,6 +7,8 @@ namespace Drive.Cardgame.Core.Cards
 {
     public class Remedy : BaseCard, ICard
     {
+        public Enum Type { get; set; }
+
         public Remedy()
         {
             Score = 0;
@@ -17,9 +19,14 @@ namespace Drive.Cardgame.Core.Cards
             throw new NotImplementedException();
         }
 
-        public void Init(string name, int value)
+        public void Init(string name, int value, Enum type)
         {
             Name = name;
+        }
+
+        string ICard.GetCardType()
+        {
+            return Type.ToString();
         }
     }
 }

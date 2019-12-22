@@ -11,9 +11,11 @@ namespace Drive.Cardgame.Core.Cards
         public Distance()
         {
             base.Score = 1;
+            
         }
 
         public int Value { get; set; }
+        public Enum Type { get;set; }
 
         public new int Score { get { return Value * base.Score; } }
 
@@ -22,13 +24,13 @@ namespace Drive.Cardgame.Core.Cards
             Distance cardPlayed = this;
 
             //cannot play a distance card without first playing roll
-            if (!cardsInPlay.Any(c => c.GetName() == "Roll"))
+            if (!cardsInPlay.Any(c => c.GetCardType() == CardType.Remedy.Roll.ToString()))
             {
                 return false;
             }
 
             //cannot play cards more than 50 when speed limit is present
-            if (cardsInPlay.Any(c => c.GetName() == "Speed Limit"))
+            if (cardsInPlay.Any(c => c.GetCardType() == CardType.Hazard.SpeedLimit.ToString()))
             {
                 if (cardPlayed.Value > 50)
                 {
@@ -38,7 +40,7 @@ namespace Drive.Cardgame.Core.Cards
 
             //cannot play more than 2 200 cards
             if (cardPlayed.GetName() == "200 km"
-                && cardsInPlay.Where(c => c.GetName() == "200 km").Count() >= 2)
+                && cardsInPlay.Where(c => c.GetCardType() == CardType.Distance.TwoHundredKilometers.ToString()).Count() >= 2)
             {
                 return false;
             }
@@ -46,10 +48,16 @@ namespace Drive.Cardgame.Core.Cards
             return true;
         }
 
-        public void Init(string name, int value)
+        public void Init(string name, int value, Enum type)
         {
             Name = name;
             Value = value;
+            Type = type;
+        }
+
+        string ICard.GetCardType()
+        {
+            return this.Type.ToString();
         }
     }
 }

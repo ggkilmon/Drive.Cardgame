@@ -6,9 +6,10 @@ namespace Drive.Cardgame.Core.Cards.Interfaces
 {
     public interface ICard
     {
-        void Init(string name, int value);
+        void Init(string name, int value, Enum type);
         bool CanPlayCard(List<ICard> cardsInPlay);
         string ToString();
-        string GetName();
+        //string GetName();
+        string GetCardType();
     }
 }
