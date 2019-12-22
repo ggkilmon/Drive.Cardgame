@@ -25,7 +25,7 @@ namespace Drive.Cardgame.ConsoleApp
                 string cardName = Console.ReadLine();
 
                 ICard playCard = p.CardsInHand.FirstOrDefault(c => c.GetName() == cardName);
-                g.PlayCard(playCard);
+                //g.PlayCard(playCard);
 
 
 

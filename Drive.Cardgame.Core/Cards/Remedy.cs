@@ -12,6 +12,11 @@ namespace Drive.Cardgame.Core.Cards
             Score = 0;
         }
 
+        public bool CanPlayCard(List<ICard> cardsInPlay)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Init(string name, int value)
         {
             Name = name;

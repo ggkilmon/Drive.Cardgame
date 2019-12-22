@@ -25,5 +25,10 @@ namespace Drive.Cardgame.Core.Cards
             IsCoupeForre = true;
             Score += 300;
         }
+
+        public bool CanPlayCard(List<ICard> cardsInPlay)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

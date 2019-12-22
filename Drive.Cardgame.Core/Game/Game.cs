@@ -55,16 +55,11 @@ namespace Drive.Cardgame.Core.Game
 
         public bool PlayCard(Player player, ICard cardPlayed)
         {
+            //need to check if playing on your own board or an opponents board
+            //need to check to make sure score doesn't go over 200
             var cardsInPlay = player.Board.CardsInPlay;
-            bool canPlayDistance = CanPlayDistanceCard(cardsInPlay, cardPlayed);
-            bool canPlaySafety = false;
-            bool canPlayRemedy = false;
-            bool canPlayHazard = false;
-
-            if (canPlayDistance 
-                || canPlaySafety
-                || canPlayRemedy
-                || canPlayHazard) {
+            if (cardPlayed.CanPlayCard(cardsInPlay))
+            {
                 cardsInPlay.Add(cardPlayed);
                 return true;
             }
@@ -109,29 +104,6 @@ namespace Drive.Cardgame.Core.Game
                     player.CardsInHand.Add(deck.Pop());
                 }
             }
-        }
-
-        public bool CanPlayDistanceCard(List<ICard> cardsInPlay, ICard cardPlayed)
-        {
-            if (cardPlayed is Distance)
-            {
-                //cannot play a distance card without first playing roll
-                if (!cardsInPlay.Any(c => c.GetName() == "Roll"))
-                {
-                    return false;
-                }
-
-                //cannot play cards more than 50 when speed limit is present
-                if (cardsInPlay.Any(c => c.GetName() == "Speed Limit"))
-                {
-                    if ((cardPlayed as Distance).Value > 50)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
         }
     }
 }

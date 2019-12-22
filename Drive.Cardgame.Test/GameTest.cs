@@ -4,6 +4,7 @@ using Drive.Cardgame.Core.Game;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Drive.Cardgame.Test
@@ -85,10 +86,12 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
+            ICard card = new Distance() { Name = "25 km", Value = 25 };
 
-            bool canPlayDistance = g.CanPlayDistanceCard(g.CurrentPlayer.Board.CardsInPlay, new Distance() { Name = "25 km", Value = 25 });
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
             Assert.IsFalse(canPlayDistance);
+            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetName() == card.GetName()));
         }
 
         [TestMethod]
@@ -96,12 +99,13 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-
+            ICard card = new Distance() { Name = "25 km", Value = 25 };
             g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0 });
 
-            bool canPlayDistance = g.CanPlayDistanceCard(g.CurrentPlayer.Board.CardsInPlay, new Distance() { Name = "25 km", Value = 25 });
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
             Assert.IsTrue(canPlayDistance);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetName() == card.GetName()));
         }
 
         [TestMethod]
@@ -109,13 +113,15 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
+            ICard card = new Distance() { Name = "50 km", Value = 50 };
 
             g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0 });
             g.CurrentPlayer.Board.CardsInPlay.Add(new Hazard() { Name = "Speed Limit", Score = 0 });
 
-            bool canPlayDistance = g.CanPlayDistanceCard(g.CurrentPlayer.Board.CardsInPlay, new Distance() { Name = "50 km", Value = 50 });
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
             Assert.IsTrue(canPlayDistance);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetName() == card.GetName()));
         }
 
         [TestMethod]
@@ -123,13 +129,15 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
+            ICard card = new Distance() { Name = "100 km", Value = 100 };
 
             g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0 });
             g.CurrentPlayer.Board.CardsInPlay.Add(new Hazard() { Name = "Speed Limit", Score = 0 });
 
-            bool canPlayDistance = g.CanPlayDistanceCard(g.CurrentPlayer.Board.CardsInPlay, new Distance() { Name = "100 km", Value = 100 });
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
             Assert.IsFalse(canPlayDistance);
+            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetName() == card.GetName()));
         }
 
         [TestMethod]
@@ -137,12 +145,14 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
+            ICard card = new Distance() { Name = "25 km", Value = 25 };
 
             g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0 });
 
-            bool canPlayDistance = g.CanPlayDistanceCard(g.CurrentPlayer.Board.CardsInPlay, new Distance() { Name = "25 km", Value = 25 });
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
             Assert.IsTrue(canPlayDistance);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetName() == card.GetName()));
         }
 
         [TestMethod]
@@ -150,12 +160,62 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
+            ICard card = new Distance() { Name = "100 km", Value = 100 };
 
             g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0 });
 
-            bool canPlayDistance = g.CanPlayDistanceCard(g.CurrentPlayer.Board.CardsInPlay, new Distance() { Name = "100 km", Value = 100 });
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
             Assert.IsTrue(canPlayDistance);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetName() == card.GetName()));
+        }
+
+        [TestMethod]
+        public void PlayDistance_0_200()
+        {
+            Game g = new Game();
+            g.StartGame();
+            ICard card = new Distance() { Name = "200 km", Value = 200 };
+
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0 });
+
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
+
+            Assert.IsTrue(canPlayDistance);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetName() == card.GetName()) == 1);
+        }
+
+        [TestMethod]
+        public void PlayDistance_1_200()
+        {
+            Game g = new Game();
+            g.StartGame();
+            ICard card = new Distance() { Name = "200 km", Value = 200 };
+
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0 });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Distance() { Name = "200 km", Value = 200 });
+
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
+
+            Assert.IsTrue(canPlayDistance);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetName() == card.GetName()) == 2);
+        }
+
+        [TestMethod]
+        public void PlayDistance_2_200()
+        {
+            Game g = new Game();
+            g.StartGame();
+            ICard card = new Distance() { Name = "200 km", Value = 200 };
+
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0 });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Distance() { Name = "200 km", Value = 200 });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Distance() { Name = "200 km", Value = 200 });
+
+            bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
+
+            Assert.IsFalse(canPlayDistance);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetName() == card.GetName()) == 2);
         }
     }
 }
