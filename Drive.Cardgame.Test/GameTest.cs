@@ -217,5 +217,51 @@ namespace Drive.Cardgame.Test
             Assert.IsFalse(canPlayDistance);
             Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == card.GetCardType()) == 2);
         }
+
+        [TestMethod]
+        public void PlayRoll_NoCardsInPlay()
+        {
+            Game g = new Game();
+            g.StartGame();
+            ICard card = new Remedy() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll };
+
+            bool canPlay = g.PlayCard(g.CurrentPlayer, card);
+
+            Assert.IsTrue(canPlay);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetCardType() == CardType.Remedy.Roll.ToString()));
+        }
+
+        [TestMethod]
+        public void PlayRoll_StopInPlay()
+        {
+            Game g = new Game();
+            g.StartGame();
+            ICard card = new Remedy() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll };
+
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Hazard() { Name = "Stop", Score = 0, Type = CardType.Hazard.Stop });
+
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetCardType() == CardType.Hazard.Stop.ToString()));
+
+            bool canPlay = g.PlayCard(g.CurrentPlayer, card);
+
+            Assert.IsTrue(canPlay);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetCardType() == CardType.Remedy.Roll.ToString()));
+            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Any(c => c.GetCardType() == CardType.Hazard.Stop.ToString()));
+        }
+
+        [TestMethod]
+        public void PlayRoll_RollAlreadyInPlay()
+        {
+            Game g = new Game();
+            g.StartGame();
+            ICard card = new Remedy() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll };
+
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Remedy() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
+
+            bool canPlay = g.PlayCard(g.CurrentPlayer, card);
+
+            Assert.IsFalse(canPlay);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.Roll.ToString()) == 1);
+        }
     }
 }

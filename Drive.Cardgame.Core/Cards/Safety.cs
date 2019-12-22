@@ -37,5 +37,10 @@ namespace Drive.Cardgame.Core.Cards
         {
             return Type.ToString();
         }
+
+        public void RemoveAffectedCardsFromPlay(List<ICard> cardsInPlay)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

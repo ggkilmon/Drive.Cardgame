@@ -39,7 +39,7 @@ namespace Drive.Cardgame.Core.Cards
             }
 
             //cannot play more than 2 200 cards
-            if (cardPlayed.GetName() == "200 km"
+            if (Type.ToString() == CardType.Distance.TwoHundredKilometers.ToString()
                 && cardsInPlay.Where(c => c.GetCardType() == CardType.Distance.TwoHundredKilometers.ToString()).Count() >= 2)
             {
                 return false;
@@ -53,6 +53,11 @@ namespace Drive.Cardgame.Core.Cards
             Name = name;
             Value = value;
             Type = type;
+        }
+
+        public void RemoveAffectedCardsFromPlay(List<ICard> cardsInPlay)
+        {
+            //don't need to remove cards from play
         }
 
         string ICard.GetCardType()

@@ -8,8 +8,8 @@ namespace Drive.Cardgame.Core.Cards.Interfaces
     {
         void Init(string name, int value, Enum type);
         bool CanPlayCard(List<ICard> cardsInPlay);
+        void RemoveAffectedCardsFromPlay(List<ICard> cardsInPlay);
         string ToString();
-        //string GetName();
         string GetCardType();
     }
 }

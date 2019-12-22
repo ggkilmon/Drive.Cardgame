@@ -60,6 +60,8 @@ namespace Drive.Cardgame.Core.Game
             var cardsInPlay = player.Board.CardsInPlay;
             if (cardPlayed.CanPlayCard(cardsInPlay))
             {
+                cardPlayed.RemoveAffectedCardsFromPlay(cardsInPlay);
+
                 cardsInPlay.Add(cardPlayed);
                 return true;
             }

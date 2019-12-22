@@ -13,10 +13,5 @@ namespace Drive.Cardgame.Core.Cards
         {
             return Name;
         }
-
-        public string GetName()
-        {
-            return this.ToString();
-        }
     }
 }
