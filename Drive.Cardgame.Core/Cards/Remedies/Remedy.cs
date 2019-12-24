@@ -17,8 +17,6 @@ namespace Drive.Cardgame.Core.Cards.Remedies
 
         public virtual bool CanPlayCard(List<ICard> cardsInPlay)
         {
-            Remedy cardPlayed = this;
-
             return true;
         }
 
@@ -26,9 +24,11 @@ namespace Drive.Cardgame.Core.Cards.Remedies
         {
             Remedy cardPlayed = this;
 
-            if (Type.ToString() == CardType.Remedy.Roll.ToString())
+            if (cardsInPlay.Any(c => c.GetCardType() == this.Type.ToString())   //remedies get removed
+                && this.Type.ToString() != CardType.Remedy.Roll.ToString())     //except rolls stay in play
             {
-                
+                var card = cardsInPlay.FirstOrDefault(c => c.GetCardType() == this.Type.ToString());
+                cardsInPlay.Remove(card);
             }
         }
 

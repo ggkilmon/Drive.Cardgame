@@ -14,22 +14,6 @@ namespace Drive.Cardgame.Core.Cards.Hazards
             Score = 0;
         }
 
-        public override bool CanPlayCard(List<ICard> cardsInPlay)
-        {
-            bool canPlayBase = base.CanPlayCard(cardsInPlay);
-
-            if (canPlayBase)
-            {
-
-            }
-            else
-            {
-                return canPlayBase;
-            }
-
-            return true;
-        }
-
         public override void RemoveAffectedCardsFromPlay(List<ICard> cardsInPlay)
         {
             base.RemoveAffectedCardsFromPlay(cardsInPlay);

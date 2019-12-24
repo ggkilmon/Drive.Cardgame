@@ -27,7 +27,7 @@ namespace Drive.Cardgame.Test
 
             Assert.IsTrue(canPlay);
             Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Hazard.SpeedLimit.ToString()) == 1);
-            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.EndOfLimit.ToString()) == 1);
+            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.EndOfLimit.ToString()) == 1);
         }
 
         [TestMethod]
@@ -41,21 +41,6 @@ namespace Drive.Cardgame.Test
 
             Assert.IsFalse(canPlay);
             Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.EndOfLimit.ToString()) == 1);
-        }
-
-        [TestMethod]
-        public void PlayEndOfLimit_EndOfLimitInPlayAlready()
-        {
-            Game g = new Game();
-            g.StartGame();
-            ICard card = new EndOfLimit();
-
-            g.CurrentPlayer.Board.CardsInPlay.Add(new EndOfLimit());
-
-            bool canPlay = g.PlayCard(g.CurrentPlayer, card);
-
-            Assert.IsFalse(canPlay);
-            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.EndOfLimit.ToString()) == 2);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Drive.Cardgame.Core.Cards
             cards.AddRange(InitCardInstances<Distance>(10, "50 km", 50, CardType.Distance.FiftyKilometers));
             cards.AddRange(InitCardInstances<Distance>(10, "75 km", 75, CardType.Distance.SeventyFiveKilometers));
             cards.AddRange(InitCardInstances<Distance>(12, "100 km", 100, CardType.Distance.OneHundredKilometers));
-            cards.AddRange(InitCardInstances<TwoHundredKilometers>(4, "200 km", 200, CardType.Distance.TwoHundredKilometers));
+            cards.AddRange(InitCardInstances<TwoHundredKilometers>(4));
 
             return cards.ToArray();
         }
@@ -81,11 +81,11 @@ namespace Drive.Cardgame.Core.Cards
         {
             List<ICard> cards = new List<ICard>();
 
-            cards.AddRange(InitCardInstances<Remedy>(6, "Repairs", 0, CardType.Remedy.Repairs));
-            cards.AddRange(InitCardInstances<Remedy>(6, "Gasoline", 0, CardType.Remedy.Gasoline));
-            cards.AddRange(InitCardInstances<Spare>(6, "Spare", 0, CardType.Remedy.Spare));
-            cards.AddRange(InitCardInstances<EndOfLimit>(6, "End of Limit", 0, CardType.Remedy.EndOfLimit));
-            cards.AddRange(InitCardInstances<Roll>(14, "Roll", 0, CardType.Remedy.Roll));
+            cards.AddRange(InitCardInstances<Repairs>(6));
+            cards.AddRange(InitCardInstances<Gasoline>(6));
+            cards.AddRange(InitCardInstances<Spare>(6));
+            cards.AddRange(InitCardInstances<EndOfLimit>(6));
+            cards.AddRange(InitCardInstances<Roll>(14));
 
             return cards.ToArray();
         }
@@ -94,11 +94,11 @@ namespace Drive.Cardgame.Core.Cards
         {
             List<ICard> cards = new List<ICard>();
 
-            cards.AddRange(InitCardInstances<Accident>(3, "Accident", 0, CardType.Hazard.Accident));
-            cards.AddRange(InitCardInstances<OutOfGas>(3, "Out of Gas", 0, CardType.Hazard.OutOfGas));
-            cards.AddRange(InitCardInstances<FlatTire>(3, "Flat Tire", 0, CardType.Hazard.FlatTire));
-            cards.AddRange(InitCardInstances<SpeedLimit>(4, "Speed Limit", 0, CardType.Hazard.SpeedLimit));
-            cards.AddRange(InitCardInstances<Hazard>(5, "Stop", 0, CardType.Hazard.Stop));
+            cards.AddRange(InitCardInstances<Accident>(3));
+            cards.AddRange(InitCardInstances<OutOfGas>(3));
+            cards.AddRange(InitCardInstances<FlatTire>(3));
+            cards.AddRange(InitCardInstances<SpeedLimit>(4));
+            cards.AddRange(InitCardInstances<Stop>(5));
 
             return cards.ToArray();
         }
@@ -111,6 +111,19 @@ namespace Drive.Cardgame.Core.Cards
             {
                 T card = new T();
                 card.Init(name, value, type);
+                cards.Add(card);
+            }
+
+            return cards.ToArray();
+        }
+
+        private ICard[] InitCardInstances<T>(int numberOfCards) where T : ICard, new()
+        {
+            List<ICard> cards = new List<ICard>();
+
+            for (var i = 0; i < numberOfCards; i++)
+            {
+                T card = new T();
                 cards.Add(card);
             }
 

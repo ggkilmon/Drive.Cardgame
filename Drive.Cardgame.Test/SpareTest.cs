@@ -41,7 +41,7 @@ namespace Drive.Cardgame.Test
 
             Assert.IsTrue(canPlay);
             Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Hazard.FlatTire.ToString()) == 1);
-            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.Spare.ToString()) == 1);
+            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.Spare.ToString()) == 1);
         }
     }
 }
