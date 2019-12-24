@@ -8,6 +8,13 @@ namespace Drive.Cardgame.Core.Cards.Distances
 {
     public class TwoHundredKilometers : Distance
     {
+        public TwoHundredKilometers()
+        {
+            Name = "200 km";
+            Type = CardType.Distance.TwoHundredKilometers;
+            Value = 200;
+        }
+
         public override bool CanPlayCard(List<ICard> cardsInPlay)
         {
             bool canPlayBase = base.CanPlayCard(cardsInPlay);

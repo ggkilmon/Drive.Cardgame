@@ -6,12 +6,12 @@ using Drive.Cardgame.Core.Cards.Interfaces;
 
 namespace Drive.Cardgame.Core.Cards.Remedies
 {
-    public class EndOfLimit : Remedy
+    public class Spare : Remedy
     {
-        public EndOfLimit()
+        public Spare()
         {
-            Name = "End of Limit";
-            Type = CardType.Remedy.EndOfLimit;
+            Name = "Spare";
+            Type = CardType.Remedy.Spare;
             Score = 0;
         }
 
@@ -21,15 +21,14 @@ namespace Drive.Cardgame.Core.Cards.Remedies
 
             if (canPlayBase)
             {
-                //can only play if there is a speed limit
-                if (!cardsInPlay.Any(c => c.GetCardType() == CardType.Hazard.SpeedLimit.ToString()))
+                if (!cardsInPlay.Any(c => c.GetCardType() == CardType.Hazard.FlatTire.ToString()))
                 {
                     return false;
                 }
             }
             else
             {
-                return false;
+                return canPlayBase;
             }
 
             return true;
@@ -39,9 +38,9 @@ namespace Drive.Cardgame.Core.Cards.Remedies
         {
             base.RemoveAffectedCardsFromPlay(cardsInPlay);
 
-            if (cardsInPlay.Any(c => c.GetCardType() == CardType.Hazard.SpeedLimit.ToString()))
+            if (cardsInPlay.Any(c => c.GetCardType() == CardType.Hazard.FlatTire.ToString()))
             {
-                var card = cardsInPlay.FirstOrDefault(c => c.GetCardType() == CardType.Hazard.SpeedLimit.ToString());
+                var card = cardsInPlay.FirstOrDefault(c => c.GetCardType() == CardType.Hazard.FlatTire.ToString());
                 cardsInPlay.Remove(card);
             }
         }

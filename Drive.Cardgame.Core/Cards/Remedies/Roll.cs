@@ -8,6 +8,13 @@ namespace Drive.Cardgame.Core.Cards.Remedies
 {
     public class Roll : Remedy
     {
+        public Roll()
+        {
+            Name = "Roll";
+            Type = CardType.Remedy.Roll;
+            Score = 0;
+        }
+
         public override bool CanPlayCard(List<ICard> cardsInPlay)
         {
             bool canPlayBase = base.CanPlayCard(cardsInPlay);

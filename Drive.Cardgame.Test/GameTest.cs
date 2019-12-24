@@ -103,7 +103,7 @@ namespace Drive.Cardgame.Test
             Game g = new Game();
             g.StartGame();
             ICard card = new Distance() { Name = "25 km", Value = 25, Type = CardType.Distance.TwentyFiveKilometers };
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
 
             bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
@@ -118,8 +118,8 @@ namespace Drive.Cardgame.Test
             g.StartGame();
             ICard card = new Distance() { Name = "50 km", Value = 50, Type = CardType.Distance.FiftyKilometers };
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Hazard() { Name = "Speed Limit", Score = 0, Type = CardType.Hazard.SpeedLimit });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
+            g.CurrentPlayer.Board.CardsInPlay.Add(new SpeedLimit());
 
             bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
@@ -134,8 +134,8 @@ namespace Drive.Cardgame.Test
             g.StartGame();
             ICard card = new Distance() { Name = "100 km", Value = 100, Type = CardType.Distance.OneHundredKilometers };
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Hazard() { Name = "Speed Limit", Score = 0, Type = CardType.Hazard.SpeedLimit });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
+            g.CurrentPlayer.Board.CardsInPlay.Add(new SpeedLimit());
 
             bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
@@ -150,7 +150,7 @@ namespace Drive.Cardgame.Test
             g.StartGame();
             ICard card = new Distance() { Name = "25 km", Value = 25, Type = CardType.Distance.TwentyFiveKilometers };
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
 
             bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
@@ -165,7 +165,7 @@ namespace Drive.Cardgame.Test
             g.StartGame();
             ICard card = new Distance() { Name = "100 km", Value = 100, Type = CardType.Distance.OneHundredKilometers };
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
 
             bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
@@ -178,9 +178,9 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new TwoHundredKilometers() { Name = "200 km", Value = 200, Type = CardType.Distance.TwoHundredKilometers };
+            ICard card = new TwoHundredKilometers();
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
 
             bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
@@ -193,10 +193,10 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new TwoHundredKilometers() { Name = "200 km", Value = 200, Type = CardType.Distance.TwoHundredKilometers };
+            ICard card = new TwoHundredKilometers();
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
-            g.CurrentPlayer.Board.CardsInPlay.Add(new TwoHundredKilometers() { Name = "200 km", Value = 200, Type = CardType.Distance.TwoHundredKilometers });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
+            g.CurrentPlayer.Board.CardsInPlay.Add(new TwoHundredKilometers());
 
             bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
@@ -209,11 +209,11 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new TwoHundredKilometers() { Name = "200 km", Value = 200, Type = CardType.Distance.TwoHundredKilometers };
+            ICard card = new TwoHundredKilometers();
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
-            g.CurrentPlayer.Board.CardsInPlay.Add(new TwoHundredKilometers() { Name = "200 km", Value = 200, Type = CardType.Distance.TwoHundredKilometers });
-            g.CurrentPlayer.Board.CardsInPlay.Add(new TwoHundredKilometers() { Name = "200 km", Value = 200, Type = CardType.Distance.TwoHundredKilometers });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
+            g.CurrentPlayer.Board.CardsInPlay.Add(new TwoHundredKilometers());
+            g.CurrentPlayer.Board.CardsInPlay.Add(new TwoHundredKilometers());
 
             bool canPlayDistance = g.PlayCard(g.CurrentPlayer, card);
 
@@ -226,7 +226,7 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll };
+            ICard card = new Roll();
 
             bool canPlay = g.PlayCard(g.CurrentPlayer, card);
 
@@ -239,7 +239,7 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll };
+            ICard card = new Roll();
 
             g.CurrentPlayer.Board.CardsInPlay.Add(new Hazard() { Name = "Stop", Score = 0, Type = CardType.Hazard.Stop });
 
@@ -257,9 +257,9 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll };
+            ICard card = new Roll();
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll() { Name = "Roll", Score = 0, Type = CardType.Remedy.Roll });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new Roll());
 
             bool canPlay = g.PlayCard(g.CurrentPlayer, card);
 
@@ -272,9 +272,9 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new EndOfLimit() { Name = "End of Limit", Type = CardType.Remedy.EndOfLimit, Score = 200 };
+            ICard card = new EndOfLimit();
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new Hazard() { Name = "Speed Limit", Type = CardType.Hazard.SpeedLimit, Score = 0 });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new SpeedLimit());
 
             bool canPlay = g.PlayCard(g.CurrentPlayer, card);
 
@@ -288,7 +288,7 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new EndOfLimit() { Name = "End of Limit", Type = CardType.Remedy.EndOfLimit, Score = 200 };
+            ICard card = new EndOfLimit();
 
             bool canPlay = g.PlayCard(g.CurrentPlayer, card);
 
@@ -301,9 +301,9 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new EndOfLimit() { Name = "End of Limit", Type = CardType.Remedy.EndOfLimit, Score = 200 };
+            ICard card = new EndOfLimit();
 
-            g.CurrentPlayer.Board.CardsInPlay.Add(new EndOfLimit() { Name = "End of Limit", Type = CardType.Remedy.EndOfLimit, Score = 200 });
+            g.CurrentPlayer.Board.CardsInPlay.Add(new EndOfLimit());
 
             bool canPlay = g.PlayCard(g.CurrentPlayer, card);
 
@@ -316,9 +316,9 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new Accident() { Name = "Accident", Type = CardType.Hazard.Accident, Score = 200 };
+            ICard card = new Accident();
 
-            g.Players[1].Board.CardsInPlay.Add(new Roll() { Name = "Roll", Type = CardType.Remedy.Roll, Score = 0 });
+            g.Players[1].Board.CardsInPlay.Add(new Roll());
 
             bool canPlay = g.PlayCard(g.Players[1], card);
 
@@ -331,7 +331,7 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new Accident() { Name = "Accident", Type = CardType.Hazard.Accident, Score = 200 };
+            ICard card = new Accident();
 
             bool canPlay = g.PlayCard(g.Players[1], card);
 
@@ -344,9 +344,9 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new FlatTire() { Name = "Flat Tire", Type = CardType.Hazard.FlatTire, Score = 200 };
+            ICard card = new FlatTire();
 
-            g.Players[1].Board.CardsInPlay.Add(new Roll() { Name = "Roll", Type = CardType.Remedy.Roll, Score = 0 });
+            g.Players[1].Board.CardsInPlay.Add(new Roll());
 
             bool canPlay = g.PlayCard(g.Players[1], card);
 
@@ -359,7 +359,7 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new FlatTire() { Name = "Flat Tire", Type = CardType.Hazard.FlatTire, Score = 200 };
+            ICard card = new FlatTire();
 
             bool canPlay = g.PlayCard(g.Players[1], card);
 
@@ -372,9 +372,9 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new OutOfGas() { Name = "Out of Gas", Type = CardType.Hazard.OutOfGas, Score = 200 };
+            ICard card = new OutOfGas();
 
-            g.Players[1].Board.CardsInPlay.Add(new Roll() { Name = "Roll", Type = CardType.Remedy.Roll, Score = 0 });
+            g.Players[1].Board.CardsInPlay.Add(new Roll());
 
             bool canPlay = g.PlayCard(g.Players[1], card);
 
@@ -387,7 +387,7 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new OutOfGas() { Name = "Out of Gas", Type = CardType.Hazard.OutOfGas, Score = 200 };
+            ICard card = new OutOfGas();
 
             bool canPlay = g.PlayCard(g.Players[1], card);
 
@@ -400,9 +400,9 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new Hazard() { Name = "Speed Limit", Type = CardType.Hazard.SpeedLimit, Score = 200 };
+            ICard card = new SpeedLimit();
 
-            g.Players[1].Board.CardsInPlay.Add(new Roll() { Name = "Roll", Type = CardType.Remedy.Roll, Score = 0 });
+            g.Players[1].Board.CardsInPlay.Add(new Roll());
 
             bool canPlay = g.PlayCard(g.Players[1], card);
 
@@ -415,12 +415,42 @@ namespace Drive.Cardgame.Test
         {
             Game g = new Game();
             g.StartGame();
-            ICard card = new Hazard() { Name = "Speed Limit", Type = CardType.Hazard.SpeedLimit, Score = 200 };
+            ICard card = new SpeedLimit();
 
             bool canPlay = g.PlayCard(g.Players[1], card);
 
             Assert.IsTrue(canPlay);
             Assert.IsFalse(g.Players[1].Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.Roll.ToString()) == 1);
+        }
+
+        [TestMethod]
+        public void PlaySpare_NoFlatTire()
+        {
+            Game g = new Game();
+            g.StartGame();
+            ICard card = new Spare();
+
+            bool canPlay = g.PlayCard(g.CurrentPlayer, card);
+
+            Assert.IsFalse(canPlay);
+            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Hazard.FlatTire.ToString()) == 1);
+            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.Spare.ToString()) == 1);
+        }
+
+        [TestMethod]
+        public void PlaySpare_FlatTire()
+        {
+            Game g = new Game();
+            g.StartGame();
+            ICard card = new Spare();
+
+            g.CurrentPlayer.Board.CardsInPlay.Add(new FlatTire());
+
+            bool canPlay = g.PlayCard(g.CurrentPlayer, card);
+
+            Assert.IsTrue(canPlay);
+            Assert.IsFalse(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Hazard.FlatTire.ToString()) == 1);
+            Assert.IsTrue(g.CurrentPlayer.Board.CardsInPlay.Count(c => c.GetCardType() == CardType.Remedy.Spare.ToString()) == 1);
         }
     }
 }
