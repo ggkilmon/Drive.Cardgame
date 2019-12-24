@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Drive.Cardgame.Core.Cards
+namespace Drive.Cardgame.Core.Cards.Distances
 {
     public class Distance : BaseCard, ICard
     {
@@ -19,7 +19,7 @@ namespace Drive.Cardgame.Core.Cards
 
         public new int Score { get { return Value * base.Score; } }
 
-        public bool CanPlayCard(List<ICard> cardsInPlay)
+        public virtual bool CanPlayCard(List<ICard> cardsInPlay)
         {
             Distance cardPlayed = this;
 
@@ -36,13 +36,6 @@ namespace Drive.Cardgame.Core.Cards
                 {
                     return false;
                 }
-            }
-
-            //cannot play more than 2 200 cards
-            if (Type.ToString() == CardType.Distance.TwoHundredKilometers.ToString()
-                && cardsInPlay.Where(c => c.GetCardType() == CardType.Distance.TwoHundredKilometers.ToString()).Count() >= 2)
-            {
-                return false;
             }
 
             return true;

@@ -1,4 +1,8 @@
-﻿using Drive.Cardgame.Core.Cards.Interfaces;
+﻿using Drive.Cardgame.Core.Cards.Distances;
+using Drive.Cardgame.Core.Cards.Hazards;
+using Drive.Cardgame.Core.Cards.Interfaces;
+using Drive.Cardgame.Core.Cards.Remedies;
+using Drive.Cardgame.Core.Cards.Safeties;
 using Drive.Cardgame.Core.Utility;
 using System;
 using System.Collections.Generic;
@@ -56,7 +60,7 @@ namespace Drive.Cardgame.Core.Cards
             cards.AddRange(InitCardInstances<Distance>(10, "50 km", 50, CardType.Distance.FiftyKilometers));
             cards.AddRange(InitCardInstances<Distance>(10, "75 km", 75, CardType.Distance.SeventyFiveKilometers));
             cards.AddRange(InitCardInstances<Distance>(12, "100 km", 100, CardType.Distance.OneHundredKilometers));
-            cards.AddRange(InitCardInstances<Distance>(4, "200 km", 200, CardType.Distance.TwoHundredKilometers));
+            cards.AddRange(InitCardInstances<TwoHundredKilometers>(4, "200 km", 200, CardType.Distance.TwoHundredKilometers));
 
             return cards.ToArray();
         }
@@ -81,7 +85,7 @@ namespace Drive.Cardgame.Core.Cards
             cards.AddRange(InitCardInstances<Remedy>(6, "Gasoline", 0, CardType.Remedy.Gasoline));
             cards.AddRange(InitCardInstances<Remedy>(6, "Spare", 0, CardType.Remedy.Spare));
             cards.AddRange(InitCardInstances<Remedy>(6, "End of Limit", 0, CardType.Remedy.EndOfLimit));
-            cards.AddRange(InitCardInstances<Remedy>(14, "Roll", 0, CardType.Remedy.Roll));
+            cards.AddRange(InitCardInstances<Roll>(14, "Roll", 0, CardType.Remedy.Roll));
 
             return cards.ToArray();
         }

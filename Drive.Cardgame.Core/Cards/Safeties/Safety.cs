@@ -1,27 +1,36 @@
 ﻿using Drive.Cardgame.Core.Cards.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Drive.Cardgame.Core.Cards
+namespace Drive.Cardgame.Core.Cards.Safeties
 {
-    public class Hazard : BaseCard, ICard
+    public class Safety : BaseCard, ICard
     {
+        public bool IsCoupeForre { get; set; }
         public Enum Type { get; set; }
 
-        public Hazard()
+        public Safety()
         {
-            Score = 0;
-        }
-
-        public bool CanPlayCard(List<ICard> cardsInPlay)
-        {
-            throw new NotImplementedException();
+            IsCoupeForre = false;
+            Score = 100;
         }
 
         public void Init(string name, int value, Enum type)
         {
             Name = name;
             Type = type;
+        }
+
+        public void CoupeFourre()
+        {
+            IsCoupeForre = true;
+            Score += 300;
+        }
+
+        public virtual bool CanPlayCard(List<ICard> cardsInPlay)
+        {
+            throw new NotImplementedException();
         }
 
         string ICard.GetCardType()
