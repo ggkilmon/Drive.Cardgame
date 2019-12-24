@@ -38,7 +38,8 @@ namespace Drive.Cardgame.Core.Cards.Hazards
 
         public virtual void RemoveAffectedCardsFromPlay(List<ICard> cardsInPlay)
         {
-            if (cardsInPlay.Any(c => c.GetCardType() == CardType.Remedy.Roll.ToString()))
+            if (cardsInPlay.Any(c => c.GetCardType() == CardType.Remedy.Roll.ToString())
+                && this.Type.ToString() != CardType.Hazard.SpeedLimit.ToString())
             {
                 var card = cardsInPlay.FirstOrDefault(c => c.GetCardType() == CardType.Remedy.Roll.ToString());
                 cardsInPlay.Remove(card);
